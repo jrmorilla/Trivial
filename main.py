@@ -1,7 +1,10 @@
 import requests
+import random
 # Prueba 1
 # Prueba 1 PC personal
-def obtener_preguntas_trivial(cantidad=10):
+
+# La siguiente función llama a la API del trivial y devuelve un json con los datos
+def obtener_preguntas_trivial(cantidad):
     url = f"https://opentdb.com/api.php?amount={cantidad}"
 
     # Realizar la solicitud HTTP
@@ -25,22 +28,51 @@ def obtener_preguntas_trivial(cantidad=10):
         print(f"Error al hacer la solicitud. Código de estado: {respuesta.status_code}")
 
 
-def estructurar_preguntas(preguntas):
-    estructura_formateada = []
+def sacar_pregunta(json_raw):
+    pregunta = json_raw['question']
+    return pregunta
 
-    for idx, pregunta in enumerate(preguntas, start=1):
-        pregunta_formateada = f"Pregunta {idx}: {pregunta['question']}\n"
+def respuesta_correcta(json_raw):
+    respuesta_correcta = json_raw['correct_answer']
+    return respuesta_correcta
+def respuestas_incorrectas(json_raw):
+    respuestas_incorrectas = json_raw['incorrect_answers']
+    return respuestas_incorrectas
 
-        # Formatear las opciones (incorrectas y correcta)
-        opciones = pregunta['incorrect_answers'] + [pregunta['correct_answer']]
-        opciones_formateadas = [f"Opción {i + 1}: {opcion}" for i, opcion in enumerate(opciones)]
+# Devuelve "opciones" que son las opciones de la respuesta enumeradas
+def construir_opciones_enumeradas(json_raw):
+    opciones = []
+    opciones.append(respuesta_correcta(json_raw))
+    for elemento in respuestas_incorrectas(json_raw):
+        opciones.append(elemento)
+    random.shuffle(opciones)
+    return opciones
 
-        # Agregar las opciones formateadas a la pregunta formateada
-        pregunta_formateada += '\n'.join(opciones_formateadas)
+def determinar_acierto(json_raw, opciones, respuesta):
+    if opciones[respuesta - 1] == respuesta_correcta(json_raw):
+        print("Respuesta Correcta")
+    else:
+        print(f"Respuesta Incorrecta. La respuesta correcta es: {respuesta_correcta(json_raw)}")
 
-        estructura_formateada.append(pregunta_formateada)
 
-    return estructura_formateada
 
-for i in estructurar_preguntas(obtener_preguntas_trivial(10)):
-    print(i)
+
+def prueba_lanzar_pregunta():
+    json_raw = obtener_preguntas_trivial(1)[0]
+    opciones = construir_opciones_enumeradas(json_raw)
+    print(sacar_pregunta(json_raw))
+    print("\n")
+    for indice, elemento in enumerate(opciones):
+        print(f"{indice + 1}. {elemento}")
+    print("\n")
+    respuesta = int(input("Elige un número: "))
+    determinar_acierto(json_raw, opciones, respuesta)
+
+prueba_lanzar_pregunta()
+
+
+
+
+
+#realizar_pregunta(obtener_preguntas_trivial(1))
+#print(obtener_preguntas_trivial(1))
