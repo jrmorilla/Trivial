@@ -37,4 +37,3 @@ def jugar_modo_carrera(num_preguntas, categoria, dificultad):
         contador = contador + 1
     print(f"Has obtenido {puntuacion} puntos")
 
-jugar_modo_carrera(10, 3, 'easy')
