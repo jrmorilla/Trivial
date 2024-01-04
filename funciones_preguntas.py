@@ -1,6 +1,29 @@
 import requests
 import random
 
+def get_json_raw_modo_carrera(num_preguntas, categoria, dificultad):
+    url = f"https://opentdb.com/api.php?amount={num_preguntas}&category={categoria}&difficulty={dificultad}"
+
+    # Realizar la solicitud HTTP
+    respuesta = requests.get(url)
+
+    # Verificar si la solicitud fue exitosa (código de estado 200)
+    if respuesta.status_code == 200:
+        # Convertir la respuesta a formato JSON
+        datos_json = respuesta.json()
+
+        # Verificar si la solicitud fue exitosa según la propiedad 'response_code'
+        if datos_json['response_code'] == 0:
+            # Extraer la lista de preguntas
+            preguntas = datos_json['results']
+
+            # Devolver la lista de preguntas
+            return preguntas
+        else:
+            print(f"Error en la API. Código de respuesta: {datos_json['response_code']}")
+    else:
+        print(f"Error al hacer la solicitud. Código de estado: {respuesta.status_code}")
+
 def get_json_raw(cantidad):
     url = f"https://opentdb.com/api.php?amount={cantidad}"
 
