@@ -37,3 +37,25 @@ def jugar_modo_carrera(num_preguntas, categoria, dificultad):
         contador = contador + 1
     print(f"Has obtenido {puntuacion} puntos")
 
+def seleccion_categoria():
+    categorias = ['Books', 'Film', 'Music', 'Musicals & Theatres', 'Television', 'Video Games', 'Board Games', 'Nature',
+                  'Computers', 'Mathematics', 'Mythology', 'Sport', 'Geography', 'History', 'Politics', 'Art', 'Celebrities',
+                  'Animals', 'Vehicles', 'Comics', 'Gadgets', 'Anime & Manga', 'Cartoon & Animations']
+    print("Categoría existentes: ")
+    for indice, categoria in enumerate(categorias):
+        print(f"{indice + 1}. {categoria}")
+    print("\n")
+    eleccion = int(input("Introduce el número de una categoría: "))
+    return eleccion + 9
+
+def seleccion_dificultad():
+    dificultades = ['easy', 'medium', 'hard']
+    print("Selecciona la dificultad:")
+    for indice, dificultad in enumerate(dificultades):
+        print(f"{indice + 1}. {dificultad}")
+    eleccion = int(input("Introduce el número de una dificultad: "))
+    return dificultades[eleccion -1]
+
+def seleccion_num_preguntas():
+    num_preguntas = int(input("Introduce cuántas preguntas tendrá esta partida: "))
+    return num_preguntas
