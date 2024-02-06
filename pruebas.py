@@ -1,4 +1,10 @@
-import funciones_preguntas
+import pandas as pd
+import sqlite3
 
-for i in funciones_preguntas.get_json_raw_modo_carrera(10, 16, 'easy'):
-    print(i)
+conn = sqlite3.connect('mi_base_de_datos.db')
+
+sql_query = "SELECT * FROM usuarios"
+
+df = pd.read_sql_query(sql_query, conn)
+
+print(df)

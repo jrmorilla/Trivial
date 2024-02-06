@@ -27,3 +27,11 @@ La idea es tener habilitadas las siguientes features:
 - Implementar todo el código de recopilación
 - Implementar todo el código de visualización
 
+## Base de datos
+
+### La base de datos de las preguntas tendrá el siguiente esquema:
+Pregunta - [Respuestas] - Respuesta correcta - Topic - Dificultad
+
+### La base de datos de los usuarios tendrá el siguiente esquema:
+
+User - {Toppic: Preg_Totales} - {Toppic: Preg_Acertadas}
