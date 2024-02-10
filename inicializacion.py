@@ -34,4 +34,4 @@ def get_num_preguntas():
     num_preguntas = int(input("Introduce un número: "))
     return num_preguntas
 
-iniciar_modo_carrera()
+#iniciar_modo_carrera()

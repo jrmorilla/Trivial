@@ -1,4 +1,5 @@
 import funciones_preguntas
+import funciones_sqlite
 import inicializacion
 
 def jugar_modo_normal(num_preguntas):
@@ -6,6 +7,14 @@ def jugar_modo_normal(num_preguntas):
     contador = 1
     puntuacion = 0
     for i in json_raw:
+        if funciones_sqlite.comprobar_existencia_pregunta_DB(funciones_preguntas.sacar_pregunta(i)) == False:
+            funciones_sqlite.añadir_datos_pregunta(PREGUNTA=funciones_preguntas.sacar_pregunta(i),
+                                                   RESPUESTAS=funciones_preguntas.get_respuestas(i),
+                                                   RESPUESTA_CORRECTA=funciones_preguntas.respuesta_correcta(i),
+                                                   TOPIC=funciones_preguntas.get_topic(i),
+                                                   DIFICULTAD=funciones_preguntas.get_difficulty(i))
+        else:
+            pass
         print(f"Tu puntuación es: {puntuacion} puntos")
         print("\n")
         opciones = funciones_preguntas.construir_opciones_enumeradas(i)
@@ -21,6 +30,14 @@ def jugar_modo_normal(num_preguntas):
 
 def jugar_modo_carrera(contador, num_preguntas, categoria, dificultad):
     json_raw = funciones_preguntas.get_json_raw_modo_carrera(1, categoria, dificultad)
+    if funciones_sqlite.comprobar_existencia_pregunta_DB(funciones_preguntas.sacar_pregunta(json_raw[0])) == False:
+        funciones_sqlite.añadir_datos_pregunta(PREGUNTA = funciones_preguntas.sacar_pregunta(json_raw[0]),
+                                               RESPUESTAS = funciones_preguntas.get_respuestas(json_raw[0]),
+                                               RESPUESTA_CORRECTA = funciones_preguntas.respuesta_correcta(json_raw[0]),
+                                               TOPIC = funciones_preguntas.get_topic(json_raw[0]),
+                                               DIFICULTAD = funciones_preguntas.get_difficulty(json_raw[0]))
+    else:
+        pass
     print("\n")
     opciones = funciones_preguntas.construir_opciones_enumeradas(json_raw[0])
     print(f"Pregunta {contador}: {funciones_preguntas.sacar_pregunta(json_raw[0])}")

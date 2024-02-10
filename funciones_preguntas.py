@@ -47,6 +47,12 @@ def get_json_raw(cantidad):
     else:
         print(f"Error al hacer la solicitud. Código de estado: {respuesta.status_code}")
 
+def get_topic(json_raw):
+    topic = json_raw['category']
+    return topic
+def get_difficulty(json_raw):
+    difficulty = json_raw['difficulty']
+    return difficulty
 
 def sacar_pregunta(json_raw):
     pregunta = json_raw['question']
@@ -58,6 +64,12 @@ def respuesta_correcta(json_raw):
 def respuestas_incorrectas(json_raw):
     respuestas_incorrectas = json_raw['incorrect_answers']
     return respuestas_incorrectas
+
+def get_respuestas(json_raw):
+    lista= respuestas_incorrectas(json_raw)
+    correcta = respuesta_correcta(json_raw)
+    lista.append(correcta)
+    return lista
 
 # Devuelve "opciones" que son las opciones de la respuesta enumeradas
 def construir_opciones_enumeradas(json_raw):
@@ -89,4 +101,3 @@ def lanzar_pregunta():
     print("\n")
     respuesta = int(input("Elige un número: "))
     determinar_acierto(json_raw, opciones, respuesta)
-

@@ -1,23 +1,31 @@
 import sqlite3
 
-conn = sqlite3.connect('mi_base_de_datos.db')
+conn = sqlite3.connect('base_datos_preguntas.db')
 
 # Crear una tabla
-conn.execute('''CREATE TABLE IF NOT EXISTS usuarios (
-                id INTEGER PRIMARY KEY,
-                nombre TEXT NOT NULL,
-                edad INTEGER
+import json
+
+# Crear la tabla
+conn.execute('''CREATE TABLE IF NOT EXISTS PREGUNTAS (
+                PREGUNTA TEXT NOT NULL,
+                RESPUESTAS TEXT,
+                RESPUESTA_CORRECTA TEXT,
+                TOPIC TEXT,
+                DIFFICULTY TEXT
                 )''')
 
 # Insertar datos
-conn.execute("INSERT INTO usuarios (nombre, edad) VALUES (?, ?)", ('Juan', 30))
-conn.execute("INSERT INTO usuarios (nombre, edad) VALUES (?, ?)", ('María', 25))
+pregunta = "De qué color es una manzana?"
+respuestas = ['Rojo', 'Lila']
+respuestas_serializadas = json.dumps(respuestas)
+
+conn.execute("INSERT INTO PREGUNTAS (PREGUNTA, RESPUESTAS, RESPUESTA_CORRECTA, TOPIC, DIFFICULTY) VALUES (?, ?, ?, ?, ?)", (pregunta, respuestas_serializadas, 'Rojo', 'Cultura General', 'Fácil'))
 
 conn.commit()
 
 cursor = conn.cursor()
 
-cursor.execute("SELECT * FROM usuarios")
+cursor.execute("SELECT * FROM PREGUNTAS")
 
 rows = cursor.fetchall()
 
