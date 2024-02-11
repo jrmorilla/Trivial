@@ -35,3 +35,8 @@ Pregunta - [Respuestas] - Respuesta correcta - Topic - Dificultad
 ### La base de datos de los usuarios tendrá el siguiente esquema:
 
 User - {Toppic: Preg_Totales} - {Toppic: Preg_Acertadas}
+
+
+### La base de datos de estadísticas tendrá el siguiente esquema:
+
+Topic - Dificultad - Evaluación

@@ -24,7 +24,14 @@ def jugar_modo_normal(num_preguntas):
         print("\n")
         respuesta = int(input("Elige un número: "))
         if funciones_preguntas.determinar_acierto(i, opciones, respuesta):
+            funciones_sqlite.añadir_datos_estadistica(TOPIC = funciones_preguntas.get_topic(i),
+                                                      DIFICULTAD = funciones_preguntas.get_difficulty(i),
+                                                      EVALUACION = 1)
             puntuacion = puntuacion + 1
+        else:
+            funciones_sqlite.añadir_datos_estadistica(TOPIC=funciones_preguntas.get_topic(i),
+                                                      DIFICULTAD=funciones_preguntas.get_difficulty(i),
+                                                      EVALUACION=0)
         contador = contador + 1
     print(f"Has obtenido {puntuacion} puntos")
 

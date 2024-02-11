@@ -1,13 +1,16 @@
 import pandas as pd
 import sqlite3
 
-conn = sqlite3.connect('base_datos_preguntas.db')
+#conn = sqlite3.connect('base_datos_preguntas.db')
+conn = sqlite3.connect('base_datos_estadisticas.db')
 
 sql_query = "SELECT * FROM PREGUNTAS"
 
 #sql_query_2 = "DELETE FROM PREGUNTAS WHERE PREGUNTA = '¿Qué significa H20?' "
 
 sql_query_3 = "SELECT * FROM PREGUNTAS"
+
+sql_query_4 = "SELECT * FROM ESTADISTICAS"
 
 #resultado = conn.execute(sql_query_3)
 
@@ -23,6 +26,6 @@ pd.set_option('display.max_columns', None)  # Mostrar todas las columnas
 
 
 
-df = pd.read_sql_query(sql_query_3, conn)
+df = pd.read_sql_query(sql_query_4, conn)
 
 print(df)

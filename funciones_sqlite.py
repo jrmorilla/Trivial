@@ -10,6 +10,14 @@ def crear_DB_PREGUNTAS():
                     TOPIC TEXT,
                     DIFFICULTY TEXT
                     )''')
+
+def crear_DB_ESTADISTICAS():
+    conn = conectar_DB('base_datos_estadisticas.db')
+    conn.execute('''CREATE TABLE IF NOT EXISTS ESTADISTICAS (
+                        TOPIC TEXT NOT NULL,
+                        DIFICULTAD TEXT NOT NULL,
+                        EVALUACION INT NOT NULL
+                        )''')
 def conectar_DB(DB_FILE):
     return sqlite3.connect(DB_FILE)
 
@@ -54,3 +62,14 @@ def añadir_datos_pregunta(PREGUNTA: str, RESPUESTAS: list, RESPUESTA_CORRECTA: 
     except ValueError as e:
         raise e
 
+def añadir_datos_estadistica(TOPIC, DIFICULTAD, EVALUACION):
+    try:
+        conn = conectar_DB('base_datos_estadisticas.db')
+        conn.execute(
+            "INSERT INTO ESTADISTICAS (TOPIC, DIFICULTAD, EVALUACION) VALUES (?, ?, ?)",
+            (TOPIC, DIFICULTAD, EVALUACION)
+        )
+        conn.commit()
+        conn.close()
+    except ValueError as e:
+        raise e
