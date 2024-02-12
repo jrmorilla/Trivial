@@ -8,4 +8,5 @@ funciones_sqlite.crear_DB_ESTADISTICAS()
 
 
 #modo_carrera.jugar_carrera()
-funciones_funcionalidad.jugar_modo_normal(10)
+
+inicializacion.iniciar_modo_carrera()
