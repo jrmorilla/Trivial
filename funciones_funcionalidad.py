@@ -1,6 +1,7 @@
 import funciones_preguntas
 import funciones_sqlite
 import inicializacion
+import time
 
 def jugar_modo_normal(num_preguntas):
     json_raw = funciones_preguntas.get_json_raw(num_preguntas)
@@ -36,6 +37,7 @@ def jugar_modo_normal(num_preguntas):
     print(f"Has obtenido {puntuacion} puntos")
 
 def jugar_modo_carrera(contador, num_preguntas, categoria, dificultad):
+    time.sleep(2) # Esto es porque si el jugador contesta muy rápido y hacemos muchas peticiones al servidor nos dará error
     json_raw = funciones_preguntas.get_json_raw_modo_carrera(1, categoria, dificultad)
     if funciones_sqlite.comprobar_existencia_pregunta_DB(funciones_preguntas.sacar_pregunta(json_raw[0])) == False:
         funciones_sqlite.añadir_datos_pregunta(PREGUNTA = funciones_preguntas.sacar_pregunta(json_raw[0]),

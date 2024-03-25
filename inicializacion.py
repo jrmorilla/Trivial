@@ -1,4 +1,5 @@
 import funciones_funcionalidad
+import time
 
 
 def iniciar_juego():
@@ -22,6 +23,7 @@ def iniciar_modo_carrera():
         print(f"Tienes {vidas} vidas")
         if funciones_funcionalidad.jugar_modo_carrera(contador, 1, categoria, dificultad) == 1:
             aciertos = aciertos + 1
+
         else:
             vidas = vidas - 1
         contador = contador + 1

@@ -74,7 +74,7 @@ def get_respuestas(json_raw):
 # Devuelve "opciones" que son las opciones de la respuesta enumeradas
 def construir_opciones_enumeradas(json_raw):
     opciones = []
-    opciones.append(respuesta_correcta(json_raw))
+    #opciones.append(respuesta_correcta(json_raw))
     for elemento in respuestas_incorrectas(json_raw):
         opciones.append(elemento)
     random.shuffle(opciones)

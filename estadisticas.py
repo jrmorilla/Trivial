@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib as pt
+import sqlite3
 
 categorias = ['Books', 'Film', 'Music', 'Musicals & Theatres', 'Television', 'Video Games', 'Board Games', 'Nature',
                   'Computers', 'Mathematics', 'Mythology', 'Sport', 'Geography', 'History', 'Politics', 'Art', 'Celebrities',
